@@ -1,0 +1,101 @@
+context:
+  name: "ros-jazzy-moveit-task-constructor-suite"
+  version: "0.1.4"
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  path: .
+
+build:
+  number: 0
+  script: |
+    # colcon builds all packages in the repo automatically in the correct order
+    colcon build \
+      --merge-install \
+      --install-base $PREFIX \
+      --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
+    
+    # Clean up so build artifacts don't get zipped into the final package
+    rm -rf build log
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - cmake
+    - make
+    - ninja
+    - pkg-config
+    - colcon-common-extensions
+    # Build tools specific to this workspace
+    - ros-jazzy-ament-cmake
+    - ros-jazzy-ament-cmake-python
+    - ros-jazzy-eigen3-cmake-module
+    - ros-jazzy-rosidl-default-generators
+  host:
+    # --- System Dependencies ---
+    - eigen
+    - fmt
+    - pybind11
+    - python
+    - qt-main
+    - yaml
+    
+    # --- ROS 2 Jazzy Dependencies ---
+    - ros-jazzy-builtin-interfaces
+    - ros-jazzy-generate-parameter-library
+    - ros-jazzy-geometry-msgs
+    - ros-jazzy-libyaml-vendor
+    - ros-jazzy-moveit-common
+    - ros-jazzy-moveit-configs-utils
+    - ros-jazzy-moveit-core
+    - ros-jazzy-moveit-msgs
+    - ros-jazzy-moveit-planners
+    - ros-jazzy-moveit-ros-move-group
+    - ros-jazzy-moveit-ros-planning
+    - ros-jazzy-moveit-ros-planning-interface
+    - ros-jazzy-moveit-ros-visualization
+    - ros-jazzy-pluginlib
+    - ros-jazzy-py-binding-tools
+    - ros-jazzy-rclcpp
+    - ros-jazzy-rclcpp-action
+    - ros-jazzy-rosidl-default-runtime
+    - ros-jazzy-rviz-common
+    - ros-jazzy-rviz-default-plugins
+    - ros-jazzy-rviz-ogre-vendor
+    - ros-jazzy-rviz2
+    - ros-jazzy-std-msgs
+    - ros-jazzy-tf2-eigen
+    - ros-jazzy-urdfdom-headers
+    - ros-jazzy-visualization-msgs
+  run:
+    # Everything in host is required at runtime
+    - eigen
+    - fmt
+    - pybind11
+    - python
+    - qt-main
+    - yaml
+    - ros-jazzy-builtin-interfaces
+    - ros-jazzy-generate-parameter-library
+    - ros-jazzy-geometry-msgs
+    - ros-jazzy-libyaml-vendor
+    - ros-jazzy-moveit-common
+    - ros-jazzy-moveit-configs-utils
+    - ros-jazzy-moveit-core
+    - ros-jazzy-moveit-msgs
+    - ros-jazzy-moveit-planners
+    - ros-jazzy-moveit-ros-move-group
+    - ros-jazzy-moveit-ros-planning
+    - ros-jazzy-moveit-ros-planning-interface
+    - ros-jazzy-moveit-ros-visualization
+    - ros-jazzy-pluginlib
+    - ros-jazzy-py-binding-tools
+    - ros-jazzy-rclcpp
+    - ros-jazzy-rclcpp-action
+    - ros-jazzy-rosidl-default-runtime
+    - ros-jazzy-rviz-common
+    - ros-jazzy-rviz-default-plugins
