@@ -38,7 +38,7 @@ requirements:
   host:
     # --- System Dependencies ---
     - eigen
-    - fmt
+    - fmt <12
     - pybind11
     - python
     - qt-main
@@ -74,7 +74,7 @@ requirements:
   run:
     # Everything in host is required at runtime
     - eigen
-    - fmt
+    - fmt <12
     - pybind11
     - python
     - qt-main
