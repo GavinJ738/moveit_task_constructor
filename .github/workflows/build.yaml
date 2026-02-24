@@ -1,0 +1,27 @@
+name: Build UR3e Packages (Ubuntu 24.04)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  rattler-build-job:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Conda Package
+        uses: prefix-dev/rattler-build-action@v0.2.34
+        with:
+          recipe-path: recipe.yaml
+          # Force the output folder to be built outside the source code tree
+          build-args: "--output-dir ../rattler_output -c https://prefix.dev/colman -c robostack-jazzy -c conda-forge"
+
+      - name: Upload
+        env:
+          PREFIX_API_KEY: ${{ secrets.PREFIX_API_KEY }}
+        run: |
+          rattler-build upload prefix -c colman ../rattler_output/linux-64/*.conda
