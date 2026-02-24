@@ -12,6 +12,8 @@ source:
 build:
   number: 2
   script: |
+    export CXXFLAGS="${CXXFLAGS} -include cstdint"
+    
     # colcon builds all packages in the repo automatically in the correct order
     colcon build \
       --merge-install \
