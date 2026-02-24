@@ -10,7 +10,7 @@ source:
   path: .
 
 build:
-  number: 0
+  number: 1
   script: |
     # colcon builds all packages in the repo automatically in the correct order
     colcon build \

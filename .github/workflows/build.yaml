@@ -24,4 +24,4 @@ jobs:
         env:
           PREFIX_API_KEY: ${{ secrets.PREFIX_API_KEY }}
         run: |
-          rattler-build upload prefix -c colman ../rattler_output/linux-64/*.conda --force
+          rattler-build upload prefix -c colman ../rattler_output/linux-64/*.conda
